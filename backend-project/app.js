@@ -5,7 +5,7 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-// 👉 Temporary Data Storage
+// Temporary Data Storage
 let records = [];
 
 /*
@@ -20,7 +20,7 @@ FORMAT OF RECORD:
 }
 */
 
-// ✅ CREATE RECORD
+//  CREATE RECORD
 app.post("/records", (req, res) => {
   const { title, amount, category, type } = req.body;
 
@@ -42,7 +42,7 @@ app.post("/records", (req, res) => {
   res.json(record);
 });
 
-// ✅ GET ALL RECORDS (with filtering + pagination)
+// GET ALL RECORDS (with filtering + pagination)
 app.get("/records", (req, res) => {
   let { page = 1, limit = 5, type, category } = req.query;
 
@@ -67,7 +67,7 @@ app.get("/records", (req, res) => {
   res.json(filtered.slice(start, end));
 });
 
-// ✅ GET SINGLE RECORD
+// GET SINGLE RECORD
 app.get("/records/:id", (req, res) => {
   const record = records.find((r) => r.id == req.params.id);
 
@@ -78,7 +78,7 @@ app.get("/records/:id", (req, res) => {
   res.json(record);
 });
 
-// ✅ UPDATE RECORD
+// UPDATE RECORD
 app.put("/records/:id", (req, res) => {
   const record = records.find((r) => r.id == req.params.id);
 
@@ -96,13 +96,13 @@ app.put("/records/:id", (req, res) => {
   res.json(record);
 });
 
-// ✅ DELETE RECORD
+// DELETE RECORD
 app.delete("/records/:id", (req, res) => {
   records = records.filter((r) => r.id != req.params.id);
   res.json({ message: "Deleted successfully" });
 });
 
-// ✅ DASHBOARD SUMMARY
+// DASHBOARD SUMMARY
 app.get("/summary", (req, res) => {
   let income = 0;
   let expense = 0;
